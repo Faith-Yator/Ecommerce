@@ -1,0 +1,122 @@
+.main-register {
+    
+    background-size: cover;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 8px;
+    width: 97%;
+    height: auto;
+    border-radius: 8px;
+    position: relative;
+    box-sizing: border-box;
+
+}
+
+.register-content1 {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.form-register {
+    width: 45%;
+    height: auto;
+    border-radius: 8px;
+    margin-left: 5rem;
+    display: inline-block;
+    background-color: #E3E2DF;
+    box-shadow: 5px 5px 15px blue;
+    padding-top: 20px;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10rem;
+}
+
+
+.form-register h1 {
+    font-family: Arial;
+    font-weight: bolder;
+    color:orangered;
+    width: 100%;
+    text-align: center;
+    font-size: 40px;
+
+}
+
+.form-register p {
+    color: red;
+    font-size: 20px;
+
+}
+/* .form-register input{
+    width: 80%;
+} */
+
+h4 {
+    font-family: Arial;
+    font-weight: bolder;
+    color: orange;
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+}
+
+form {
+    text-align: center;
+    padding-bottom: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-left: 3rem;
+}
+
+form label {
+    font-size: 20px;
+    font-weight: bold;
+    color: #1A1A1D;
+}
+
+.form-register input {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    margin: 5px;
+    padding: 5px;
+    background-color: #E3E2DF;
+    color: #1A1A1D;
+    border-radius: 10px;
+    width: 90%;
+
+}
+
+input:hover {
+    background-color: orangered;
+    color: #1A1A1D;
+}
+
+button {
+    background-color: orange;
+    color: #E3E2DF;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+    margin: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 10px;
+    margin: 10px;
+}
+
+h3 {
+    font-family: Arial;
+    font-weight: bolder;
+    color: #1A1A1D;
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+}

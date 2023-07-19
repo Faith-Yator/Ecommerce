@@ -1,0 +1,74 @@
+.delivery-page {
+    padding: 20px;
+  }
+  
+  .delivery-details {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .delivery-address {
+    width: 50%;
+  }
+  
+  .delivery-address table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .delivery-address th,
+  .delivery-address td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .delivery-address caption {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .delivery-progress .progress-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .delivery-progress .progress-item {
+    margin-bottom: 8px;
+    padding-left: 20px;
+    position: relative;
+  }
+  
+  .delivery-progress .progress-item::before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  
+  .delivery-progress .completed::before {
+    background-color: green;
+  }
+  
+  .delivery-progress .active::before {
+    background-color: orange;
+  }
+  
+  .delivery-actions button {
+    margin-right: 10px;
+    padding: 10px 20px;
+    background-color: orange;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+  }
+  
+  .delivery-actions button:hover {
+    background-color: darkorange;
+  }
+  

@@ -1,0 +1,40 @@
+.card2 {
+        width: 90%;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 16px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin: 16px;
+        height: 100%;
+        animation: animate 16s ease-in-out infinite;
+      
+
+  }
+  .card2:hover{
+    box-shadow: 0 4px 8px darkblue;
+  }
+  @keyframes animate {
+
+    0%,
+    100% {
+        background-image: url('../help/placement.png');
+    }
+
+    25% {
+        background-image: url('../help/refunds.png');
+    }
+
+    50% {
+        background-image: url('../help/others.png');
+    }
+
+    75% {
+        background-image: url('.\src\netwotk\1 (5).jpg');
+    }
+}
+
+.order{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}

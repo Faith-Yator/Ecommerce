@@ -1,0 +1,29 @@
+.admin-page {
+    display: flex;
+  }
+  
+  .side-navbar {
+    width: 200px;
+    background-color: #f0f0f0;
+    padding: 20px;
+  }
+  
+  .side-navbar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .side-navbar li {
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .side-navbar li.active {
+    background-color: #ddd;
+  }
+  
+  .main-content {
+    flex-grow: 1;
+    padding: 20px;
+  }

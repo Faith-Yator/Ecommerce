@@ -1,0 +1,28 @@
+.card1{
+    display: flex;
+}
+.help h1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: orangered;
+}
+.help p{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.helpsearch{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.search-btn{
+    padding: 10px;
+    border-radius: 10px;
+}
+.card img{
+    width: 150px;
+    height: 150px;
+}

@@ -1,0 +1,21 @@
+/* Description.css */
+.app {
+    text-align: center;
+  }
+  
+  .card {
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 300px;
+    margin: 0 auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .device-image {
+    width: 200px;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  
+  /* Add additional styles as needed */
+  

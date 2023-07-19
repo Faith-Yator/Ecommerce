@@ -1,0 +1,45 @@
+.track-order-page {
+    text-align: center;
+    margin: 20px;
+  }
+  
+  .order-table {
+    margin-bottom: 20px;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  .order-table caption {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .order-table th,
+  .order-table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+  
+  .order-status {
+    text-align: center;
+  }
+  
+  .status-table {
+    margin: 0 auto;
+    border-collapse: collapse;
+  }
+  
+  .status-table td {
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+  }
+  
+  .status-row.completed {
+    background-color: #f2f2f2;
+  }
+  
+  .status-row.active {
+    background-color: #e6f7ff;
+  }
+  
