@@ -26,9 +26,11 @@ import FaqPage from './pages/Faq'
 import PaymentPage from './pages/PaymentPage'
 import AdminLogIn from './pages/Admin'
 import Logout from './pages/Logout'
-
-
-
+import AdminInfo from './pages/AdminInfo'
+import ProductPage from './pages/ProductPage'
+import Cards from './pages/Cards'
+import Customerreview  from './pages/Customerreview'
+import BasicTable from './pages/Table'
 
 function App () {
   const [count, setCount] = useState(0)
@@ -40,9 +42,12 @@ function App () {
      <Navbar/>
     
      <Routes>
-    
+    <Route path='/admin' element={<AdminInfo />}/>
+    <Route path='/customerreview'element={<Customerreview />}/>
       <Route path='/adminlogin' element={<AdminLogIn/>} />
       <Route path='/' element={<Home />}/>
+      <Route path='/table' element={<BasicTable />}/>
+      <Route path='/cards' element={<Cards />}/>
       <Route path='/computer' element={<Computer/>}/>
       <Route path='/homeappliances' element={<Homeappliances/>}/>
       <Route path='/printers' element={<Printers/>}/>
@@ -64,6 +69,8 @@ function App () {
       <Route path='/questions' element={<FaqPage/>}/>
       <Route path='/payment' element={<PaymentPage/>}/>
       <Route path='/logout' element={<Logout/>}/>
+      <Route path='/product' element={<ProductPage/>}/>
+ 
            </Routes>
        
      <Footer/>

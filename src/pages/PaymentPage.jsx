@@ -4,12 +4,13 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import './PaymentPage.css';
 import { useNavigate } from 'react-router-dom';
+import Axios from 'axios';
 
 const schema = yup.object().shape({
   cardNumber: yup.string().required('Card Number is required'),
-  username: yup.string().required('Username is required'),
-  productName: yup.string().required('Product Name is required'),
-  amount: yup.string().typeError('Amount must be a number').required('Amount is required'),
+  Username: yup.string().required('Username is required'),
+  Productname: yup.string().required('Product Name is required'),
+  Amount: yup.string().typeError('Amount must be a number').required('Amount is required'),
 });
 
 function PaymentPage() {
@@ -20,10 +21,21 @@ function PaymentPage() {
 
   const onSubmit = (data) => {
     // Perform payment processing logic here
-    console.log('Payment submitted:', data);
-    alert('Payment successfully processed');
-    navigate('/logout');
-    reset();
+    // console.log('Payment submitted:', data);
+    // alert('Payment successfully processed');
+    // navigate('/logout');
+    // reset();
+    Axios.post('http://localhost:3000/payment/new', data)
+    .then((response) => {
+      // Handle successful response
+      console.log(response.data);
+      navigate('/Logout');
+      reset(); 
+    })
+    .catch((error) => {
+      // Handle error
+      console.error(error);
+    });
   };
 
   return (
@@ -41,34 +53,34 @@ function PaymentPage() {
           {errors.cardNumber && <p className="error-message">{errors.cardNumber.message}</p>}
         </div>
         <div className="form-group">
-          <label htmlFor="username">Username</label>
+          <label htmlFor="Username">Username</label>
           <input
             type="text"
-            id="username"
-            {...register('username')}
+            id="Username"
+            {...register('Username')}
             placeholder="Enter Username"
           />
           {errors.username && <p className="error-message">{errors.username.message}</p>}
         </div>
         <div className="form-group">
-          <label htmlFor="productName">Product Name</label>
+          <label htmlFor="Productname">Productname</label>
           <input
             type="text"
-            id="productName"
-            {...register('productName')}
+            id="ProductName"
+            {...register('Productname')}
             placeholder="Enter Product Name"
           />
-          {errors.productName && <p className="error-message">{errors.productName.message}</p>}
+          {errors.Productname && <p className="error-message">{errors.Productname.message}</p>}
         </div>
         <div className="form-group">
-          <label htmlFor="amount">Amount</label>
+          <label htmlFor="Amount">Amount</label>
           <input
             type="text"
-            id="amount"
-            {...register('amount')}
+            id="Amount"
+            {...register('Amount')}
             placeholder="Enter Amount"
           />
-          {errors.amount && <p className="error-message">{errors.amount.message}</p>}
+          {errors.Amount && <p className="error-message">{errors.Amount.message}</p>}
         </div>
         <button type="submit" className="submit-button">Pay Now</button>
       </form>

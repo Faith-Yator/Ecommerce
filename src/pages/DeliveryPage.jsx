@@ -1,15 +1,36 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import './DeliveryPage.css';
+import  Axios  from 'axios';
+
+const schema = yup.object().shape({
+  Username: yup.string().required('Username is required'),
+  Address: yup.string().required(' Address is required'),
+  City: yup.string().required('City is required'),
+  Zip: yup.string().required('Zip is required'),
+});
 
 function DeliveryPage() {
-  const [deliveryProgress, setDeliveryProgress] = useState('Order Placed');
-  const [name, setName] = useState('');
-  const [streetAddress, setStreetAddress] = useState('');
-  const [city, setCity] = useState('');
-  const [zip, setZip] = useState('');
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  const [deliveryProgress, setDeliveryProgress] = React.useState('Order Placed');
+  const [Username, setUsername] = React.useState('');
+  const [Address, setAddress] = React.useState('');
+  const [City, setCity] = React.useState('');
+  const [Zip, setZip] = React.useState('');
   const estimatedDeliveryDate = calculateEstimatedDeliveryDate();
 
-  useEffect(() => {
+  React.useEffect(() => {
     // Simulate progress updates after some time intervals
     const progressInterval = setInterval(() => {
       switch (deliveryProgress) {
@@ -26,7 +47,7 @@ function DeliveryPage() {
           // Do nothing if already delivered
           break;
       }
-    }, 3000); // Progress updates every 3 seconds
+    }, 10000); // Progress updates every 3 seconds
 
     return () => clearInterval(progressInterval);
   }, [deliveryProgress]);
@@ -38,55 +59,72 @@ function DeliveryPage() {
     return estimatedDate.toDateString();
   }
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
+  const handleFormSubmit = (data) => {
     // Perform any form submission logic here, e.g., saving the entered details
-    console.log('Form submitted');
+    console.log('Form submitted', data);
+    reset();
+    Axios.post('http://localhost:3000/delivery/new', data)
+    .then((response) => {
+      console.log(response.data);
+      reset(); 
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+
   };
 
   return (
     <div className="delivery-page">
       <h1>Delivery Information</h1>
-      <form className="delivery-details" onSubmit={handleFormSubmit}>
+      <form className="delivery-details" onSubmit={handleSubmit(handleFormSubmit)}>
         <div className="form-group">
-          <label htmlFor="name">Name</label>
+          <label htmlFor="Username">Username</label>
           <input
             type="text"
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            id="Username"
+            {...register('Username')}
+            value={Username}
+            onChange={(e) => setUsername(e.target.value)}
             placeholder="Enter your name"
           />
+          {errors.Username && <p>{errors.Username.message}</p>}
         </div>
         <div className="form-group">
-          <label htmlFor="streetAddress">Street Address</label>
+          <label htmlFor="Address"> Address</label>
           <input
             type="text"
-            id="streetAddress"
-            value={streetAddress}
-            onChange={(e) => setStreetAddress(e.target.value)}
-            placeholder="Enter your street address"
+            id="Address"
+            {...register('Address')}
+            value={Address}
+            onChange={(e) => setAddress(e.target.value)}
+            placeholder="Enter your  address"
           />
+          {errors.Address && <p>{errors.Address.message}</p>}
         </div>
         <div className="form-group">
-          <label htmlFor="city">City</label>
+          <label htmlFor="City">City</label>
           <input
             type="text"
-            id="city"
-            value={city}
+            id="City"
+            {...register('City')}
+            value={City}
             onChange={(e) => setCity(e.target.value)}
-            placeholder="Enter your city"
+            placeholder="Enter your City"
           />
+          {errors.City && <p>{errors.City.message}</p>}
         </div>
         <div className="form-group">
-          <label htmlFor="zip">Zip</label>
+          <label htmlFor="Zip">Zip</label>
           <input
             type="text"
-            id="zip"
-            value={zip}
+            id="Zip"
+            {...register('Zip')}
+            value={Zip}
             onChange={(e) => setZip(e.target.value)}
-            placeholder="Enter your zip code"
+            placeholder="Enter your Zip code"
           />
+          {errors.Zip && <p>{errors.Zip.message}</p>}
         </div>
         <div className="delivery-method">
           <h2>Delivery Method</h2>
@@ -107,6 +145,8 @@ function DeliveryPage() {
       <div className="delivery-actions">
         <button className="track-button">Track Order</button>
         {deliveryProgress === 'Order Placed' && <button className="cancel-button">Cancel Order</button>}
+        {/* Link to the Orders page */}
+        <Link to="/order">View Orders</Link>
       </div>
     </div>
   );

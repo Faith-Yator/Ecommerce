@@ -53,8 +53,16 @@
     display: inline-block;
     width: 300px;
     margin: 20px;
-    text-align: center;
-  }
+    box-shadow: 0 2px 4px blue;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 2px 4px blue;
+}
+
   
   .product img {
     width: 100%;

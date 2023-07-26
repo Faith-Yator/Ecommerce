@@ -1,5 +1,6 @@
 import React from 'react';
 import './TrackOrderPage.css';
+import Table from './Table'
 
 function TrackOrderPage() {
   // Get the current date
@@ -43,6 +44,7 @@ function TrackOrderPage() {
             </tr>
           </tbody>
         </table>
+        <Table/>
       </div>
     </div>
   );

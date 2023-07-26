@@ -24,7 +24,7 @@ function Footer() {
             <FaMapMarkerAlt /> DIGISTIC-ELECTRONICS-Kenya
           </a>
           <a href='/'>
-            <FaPhone /> Tel.: +254 711 069 999
+            <FaPhone /> Tel.: +254 703 623 311
           </a>
           <a href='/'>
             <FaEnvelope /> Email: info@digisticelectronics.co.ke

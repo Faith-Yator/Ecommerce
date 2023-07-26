@@ -3,7 +3,7 @@ const computerData = [
       id: 1,
       title: 'DELL OptiPlex 790 SFF Intel Core I3 3.3GHz -4GB DDR3',
       price: 'KSh 17,999',
-      image: './computers/1 (1).jpg',
+      image: '/computers/1 (1).jpg',
        description:'laptop with',
         buttonText: 'Add to Cart',
         buttonLink:'/cart'

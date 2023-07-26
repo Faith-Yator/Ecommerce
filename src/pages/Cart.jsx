@@ -1,16 +1,14 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { BsCart3 } from 'react-icons/bs';
 import { IoMdTrash } from 'react-icons/io';
 import './Cart.css';
-import { CartContext } from './Context/CartContext.jsx';
+import { useCart } from './Context/CartContext';
 
 function Cart() {
-  const { state, dispatch } = useContext(CartContext);
+  const { state, dispatch } = useCart();
 
-  const total = state.reduce((total, item) => {
-    return total + item.price * item.quantity;
-  }, 0);
+  const total = state.length > 0 ? state.reduce((total, item) => total + item.price * item.quantity, 0) : 0;
 
   const handleIncrease = (item) => {
     dispatch({ type: 'INCREASE', payload: item });
@@ -56,22 +54,30 @@ function Cart() {
               <div className='cart-item-details'>
                 <h3>{item.title}</h3>
                 <p>{item.description}</p>
-                <p>Price: Ksh{item.price}</p>
+                <p>Price: Ksh {item.price}</p>
                 <div className='quantity'>
-                  <button onClick={() => handleIncrease(item)}>+</button>
-                  <p>{item.quantity}</p>
                   <button onClick={() => handleDecrease(item)}>-</button>
+                  <p>{item.quantity}</p>
+                  <button onClick={() => handleIncrease(item)}>+</button>
                 </div>
                 <IoMdTrash onClick={() => handleRemove(item)} />
               </div>
             </div>
           ))}
           <div className='total'>
-            <h2>Total: Ksh{total}</h2>
-            <button>Checkout: Ksh{total}</button>
+            <h2>Total: Ksh {total}</h2>
+            <button>Checkout: Ksh {total}</button>
           </div>
           <button className='cart-btn'>
             <Link to='/'>Continue Shopping</Link>
+          </button>
+          {/* Button to direct to the payment page */}
+          <button className='cart-btn'>
+            <Link to='/payment'>Proceed to Payment</Link>
+          </button>
+          {/* Button to direct to the order page */}
+          <button className='cart-btn'>
+            <Link to='/order'>Order Now</Link>
           </button>
         </div>
       )}

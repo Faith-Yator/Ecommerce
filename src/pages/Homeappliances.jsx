@@ -1,9 +1,8 @@
-
 import React, { useContext } from 'react';
 import './tvs.css';
 import { Link } from 'react-router-dom';
 import homeappData from './homeappData';
-import { CartContext } from './Context/CartContext.jsx';
+import { CartContext } from './Context/CartContext';
 
 function Homeappliances() {
   const { state, dispatch } = useContext(CartContext);
@@ -13,8 +12,13 @@ function Homeappliances() {
     dispatch({ type: 'ADD', payload: item });
   };
 
+  // Calculate the total quantity of items in the cart
+  const totalQuantity = state.reduce((total, item) => total + item.quantity, 0);
+
   return (
     <div className="computer">
+      <h1>Refrigerators</h1>
+      <button className="cart-status">Items in cart: {totalQuantity}</button>
       <div className="card-container">
         {data.map((item) => {
           item.quantity = 1;
@@ -25,6 +29,9 @@ function Homeappliances() {
               </div>
               <div className="title">
                 <h2>{item.title}</h2>
+              </div>
+              <div className="price">
+                <h2>{item.price}</h2>
               </div>
               <div className="description">
                 <pre>{item.description}</pre>

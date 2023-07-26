@@ -1,0 +1,31 @@
+.app{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.appglass{
+    display: grid;
+    width: 97%;
+    height: 97%;
+    /* border-radius: 2rem; */
+  gap:20px;
+    overflow: hidden;
+    grid-template-columns: 8rem auto 15rem;
+
+}
+@media screen and (max-width:1200px) {
+  .appglass{
+    grid-template-columns: 10% 50% auto;
+    overflow-y: scroll;
+  }
+  
+}
+@media screen and (max-width:768px){
+  .appglass{
+    grid-template-columns: 1fr;
+  }
+  .appglass::-webkit-scrollbar{
+    display: none;
+  }
+}

@@ -3,17 +3,18 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import './ordermanagement.css';
-// import Axios from 'axios';
-// import { useNavigate } from 'react-router-dom';
+import Axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function OrderManagement() {
 
 const schema = yup.object().shape({
-  UserName: yup.string().required(),
-  OrderNumber: yup.string().required(),
-  ProductName: yup.string().required(),
-  OrderDate: yup.string().required()
+  Username: yup.string().required(),
+  Productname: yup.string().required(),
+  Ordernumber: yup.string().required(),
+  Location: yup.string().required()
 });
+const navigate=useNavigate()
   const {
     register,
     handleSubmit,
@@ -25,42 +26,53 @@ const schema = yup.object().shape({
   const onSubmit = (data) => {
     // Handle form submission logic here
     console.log(data);
-    reset()
+    Axios.post('http://localhost:3000/orders/new', data)
+    .then((response) => {
+      // Handle successful response
+      console.log(response.data);
+      navigate('/payment');
+      reset(); 
+    })
+    .catch((error) => {
+      // Handle error
+      console.error(error);
+    });
+  
   }
   return (
     <div className="contact-form-container">
       <form onSubmit={handleSubmit(onSubmit)} className="contact-form">
-        <input
+      <input
           type="text"
-          name="UserName"
-          placeholder="UserName"
-          {...register('UserName')}
+          name="Username"
+          placeholder="Username"
+          {...register('Username')}
         />
-        { errors.UserName && <p>{errors.UserName.message}</p>}
+        { errors.Username && <p>{errors.Username.message}</p>}
 
         <input
           type="text"
-          name="OrderNumber"
-          placeholder="OrderNumber"
-          {...register('OrderNumber')}
+          name="Ordernumber"
+          placeholder="Ordernumber"
+          {...register('Ordernumber')}
         />
-        {errors.OrderNumber && <p>{errors.OrderNumber.message}</p>}
+        {errors.Ordernumber && <p>{errors.Ordernumber.message}</p>}
 
         <input
           type="text"
-          name="ProductName"
-          placeholder="ProductName"
-          {...register('ProductName')}
+          name="Productname"
+          placeholder="Productname"
+          {...register('Productname')}
         />
-        {errors.ProductName && <p>{errors.ProductName.message}</p>}
+        {errors.Productname && <p>{errors.Productname.message}</p>}
 
         <input
           type="text"
-          name="OrderDate"
-          placeholder="OrderDate"
-          {...register('OrderDate')}
+          name="Location"
+          placeholder="Location"
+          {...register('Location')}
         />
-        {errors.OrderDate && <p>{errors.OrderDate.message}</p>}
+        {errors.Location && <p>{errors.Location.message}</p>}
 
         <button type="submit">Submit</button>
       </form>

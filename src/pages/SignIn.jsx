@@ -11,9 +11,9 @@ function SignIn() {
 
   // Define the validation schema using yup
   const schema = yup.object().shape({
-    username: yup.string().required('Use any preferred username'),
-    email: yup.string().email().required('Email is required'),
-    password: yup.string().min(4).max(10).required('Password is required'),
+    Username: yup.string().required('Use any preferred username'),
+    Email: yup.string().email().required('Email is required'),
+    Password: yup.string().min(4).max(10).required('Password is required'),
    
   });
 
@@ -25,8 +25,20 @@ function SignIn() {
   // Handle form submission
   const handleSubmission = (data) => {
     console.log(data);
-    reset();
-    navigate("/login");
+    Axios
+    .post('http://localhost:3000/auth/Register', data)
+    .then((response) => {
+      console.log(response.data);
+      alert('Register Successfully');
+      navigate('/login');
+    })
+    .catch((error) => {
+      console.error(error);
+      alert('Please register into your account');
+    });
+  reset();
+    //  reset();
+    //  navigate("/login");
   };
 
   return (
@@ -42,16 +54,16 @@ function SignIn() {
           <form onSubmit={handleSubmit(handleSubmission)}>
 
             <label>Username</label><br /><br />
-            <input type='text' placeholder='Username' {...register('username')} /><br />
-            <p>{errors.username?.message}</p><br />
+            <input type='text' placeholder='Username' {...register('Username')} /><br />
+            <p>{errors.Username?.message}</p><br />
 
             <label>Email</label><br /><br />
-            <input type='email' placeholder='Email' {...register('email')} /><br />
-            <p>{errors.email?.message}</p><br />
+            <input type='Email' placeholder='Email' {...register('Email')} /><br />
+            <p>{errors.Email?.message}</p><br />
 
             <label>Password</label><br /><br />
-            <input type='password' placeholder='Password' {...register('password')} /><br />
-            <p>{errors.password?.message}</p><br />
+            <input type='Password' placeholder='Password' {...register('Password')} /><br />
+            <p>{errors.Password?.message}</p><br />
 
             <input type='submit' value='SignIn' style={{ width: '50%', color: 'white', backgroundColor: 'orange', fontWeight: 'bolder', padding: "10px" }} />
           </form>

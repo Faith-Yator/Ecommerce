@@ -1,0 +1,27 @@
+.rigtside{
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    justify-content: space-evenly;
+}
+
+@media screen and (max-width:1200px){
+    .rigtside{
+        justify-content: flex-start;
+        margin-top: 3rem;
+
+    }
+}
+@media screen and (max-width:768px){
+    .rigtside{
+        width: 100%;
+        margin-top: 0;
+
+
+    }
+    .rigtside>div{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}

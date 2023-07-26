@@ -15,6 +15,7 @@ function Printers() {
 
   return (
     <div className="computer">
+       <h1>Printers & Scanners</h1>
       <div className="card-container">
         {data.map((item) => {
           item.quantity = 1;
@@ -25,6 +26,9 @@ function Printers() {
               </div>
               <div className="title">
                 <h2>{item.title}</h2>
+              </div>
+              <div className="price">
+                <h2>{item.price}</h2>
               </div>
               <div className="description">
                 <pre>{item.description}</pre>

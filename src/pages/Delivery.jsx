@@ -1,82 +1,117 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 import { useNavigate } from 'react-router-dom';
+import Axios from 'axios';
 import './delivery.css';
 
+const schema = yup.object().shape({
+  Username: yup.string().required('Username is required'),
+  Productname: yup.string().required('Product Name is required'),
+  Ordernumber: yup.string().required('Order Number is required'),
+  Location: yup.string().required('Location is required')
+});
+
 function Delivery() {
-  const [users, setUsers] = useState([]);
-  const [newUser, setNewUser] = useState({ ProductName: '', OrderNumber: '', UserName: '', Location: '' });
+  const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm({
+    resolver: yupResolver(schema)
+  });
+
+  const [users, setUsers] = React.useState([]);
 
   const handleInputChange = (e) => {
-    setNewUser({ ...newUser, [e.target.name]: e.target.value });
+    setValue(e.target.name, e.target.value);
   };
 
-  const add = () => {
-    setUsers([...users, newUser]);
-    setNewUser({ Username: '', OrderNumber: '', ProductName: '', Location: '' });
+  const onSubmit = (data) => {
+    Axios.post('http://localhost:3000/orders/new', data)
+      .then((response) => {
+        console.log(response.data);
+        setUsers([...users, data]); // Add the submitted data to the users state
+        reset(); // Reset the form
+        alert('order made successfully')
+      })
+      .catch((error) => {
+        console.error(error);
+        alert('order failed')
+      });
   };
 
   const navigate = useNavigate();
 
-  const redirectToPayment = () => {
-    // Add your logic or validations here if needed before redirecting
-    navigate('/payment'); // Replace '/payment' with the actual URL of the payment page
+  const handleAddToCart = () => {
+    const formData = {
+      Username: register.Username.value,
+      Productname: register.Productname.value,
+      Ordernumber: register.Ordernumber.value,
+      Location: register.Location.value
+    };
+    setUsers([...users, formData]);
+    reset();
   };
 
   return (
-    <div className="table-container">
-      <table className="table">
-        <thead>
-          <tr>
-            <th>Username</th>
-            <th>Ordernumber</th>
-            <th>Productname</th>
-            <th>Location</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((user, index) => (
-            <tr key={index}>
-              <td>{user.Username}</td>
-              <td>{user.ProductName}</td>
-              <td>{user.OrderNumber}</td>
-              <td>{user.Location}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className="form-container">
+      <form onSubmit={handleSubmit(onSubmit)} className="contact-form">
+        <input
+          type="text"
+          name="Username"
+          placeholder="Username"
+          {...register('Username')}
+        />
+        {errors.Username && <p>{errors.Username.message}</p>}
 
-      <div className="form-container">
         <input
           type="text"
-          name="UserName"
-          placeholder="UserName"
-          value={newUser.UserName}
-          onChange={handleInputChange}
+          name="Productname"
+          placeholder="Productname"
+          {...register('Productname')}
         />
+        {errors.Productname && <p>{errors.Productname.message}</p>}
+
         <input
           type="text"
-          name="ProductName"
-          placeholder="Product Name"
-          value={newUser.ProductName}
-          onChange={handleInputChange}
+          name="Ordernumber"
+          placeholder="OrderNumber"
+          {...register('Ordernumber')}
         />
-        <input
-          type="text"
-          name="OrderNumber"
-          placeholder="Order Number"
-          value={newUser.OrderNumber}
-          onChange={handleInputChange}
-        />
+        {errors.Ordernumber && <p>{errors.Ordernumber.message}</p>}
 
         <input
           type="text"
           name="Location"
           placeholder="Location"
-          value={newUser.Location}
-          onChange={handleInputChange}
+          {...register('Location')}
         />
-        <button onClick={add}>Add</button>
-        <button onClick={redirectToPayment}>Go to Payment</button>
+        {errors.Location && <p>{errors.Location.message}</p>}
+
+        <button type="submit">Submit</button>
+        <button type="button" onClick={handleAddToCart}>Add to Cart</button>
+        <button onClick={() => navigate('/payment')}>Go to Payment</button>
+      </form>
+
+      <div className="table-container">
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Username</th>
+              <th>Ordernumber</th>
+              <th>Productname</th>
+              <th>Location</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map((user, index) => (
+              <tr key={index}>
+                <td>{user.Username}</td>
+                <td>{user.Ordernumber}</td>
+                <td>{user.Productname}</td>
+                <td>{user.Location}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
